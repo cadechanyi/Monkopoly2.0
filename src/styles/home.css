@@ -1,0 +1,196 @@
+.home-root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Keep content clear of the absolutely positioned footer */
+  padding: max(12px, env(safe-area-inset-top, 0px)) 16px
+    max(48px, calc(20px + env(safe-area-inset-bottom, 0px))) 16px;
+  box-sizing: border-box;
+}
+
+.home-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url("/assets/images/finalboard.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(2px) brightness(0.45) saturate(1.1);
+  transform: scale(1.05);
+  z-index: 0;
+}
+
+.home-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.55) 65%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+  z-index: 1;
+}
+
+.home-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  padding: 32px 24px;
+  max-width: 640px;
+  text-align: center;
+  flex-shrink: 1;
+  min-height: 0;
+  max-height: 100%;
+}
+
+.home-brand {
+  /* Wrapper only; visual frame is applied to the image itself. */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.home-title-image {
+  display: block;
+  width: min(560px, 94vw);
+  max-width: min(560px, 94vw);
+  height: auto;
+  object-fit: contain;
+  border-radius: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(
+    155deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(45, 74, 52, 0.35) 50%,
+    rgba(26, 32, 44, 0.6) 100%
+  );
+  padding: 3px;
+  box-sizing: border-box;
+  /* Sit softly on the blurred board while keeping a rounded frame */
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.35),
+    0 10px 32px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.12),
+    inset 0 1px 24px rgba(0, 0, 0, 0.08);
+}
+
+.home-subtitle {
+  margin: 0;
+  font-size: clamp(16px, 2vw, 20px);
+  color: #cbd5e0;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.home-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: min(360px, 90vw);
+  margin-top: 16px;
+}
+
+.home-btn {
+  position: relative;
+  width: 100%;
+  padding: 18px 28px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border-radius: 12px;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: transform 0.12s ease, box-shadow 0.18s ease, filter 0.15s ease;
+}
+
+.home-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.home-btn-primary {
+  background: linear-gradient(180deg, #38a169 0%, #276749 100%);
+}
+
+.home-btn-secondary {
+  background: linear-gradient(180deg, #4299e1 0%, #2b6cb0 100%);
+}
+
+.home-btn-tertiary {
+  background: linear-gradient(180deg, #2d3748 0%, #1a202c 100%);
+}
+
+.home-footer {
+  position: absolute;
+  bottom: max(12px, env(safe-area-inset-bottom, 0px));
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 2;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 12px;
+  letter-spacing: 1px;
+  pointer-events: none;
+}
+
+/* Phones: reserve more space above the footer so buttons stay on-screen */
+@media (max-width: 720px) {
+  .home-root {
+    padding-bottom: max(54px, calc(28px + env(safe-area-inset-bottom, 0px)));
+  }
+}
+
+/* Laptops / desktops: tighter vertical stack so nothing clips under #root overflow:hidden */
+@media (min-width: 721px) {
+  .home-root {
+    padding-top: max(10px, env(safe-area-inset-top, 0px));
+    padding-bottom: max(36px, calc(16px + env(safe-area-inset-bottom, 0px)));
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .home-content {
+    gap: 12px;
+    padding: 10px 20px;
+  }
+
+  .home-buttons {
+    margin-top: 0;
+    gap: 10px;
+    width: min(340px, 100%);
+  }
+
+  .home-btn {
+    padding: 12px 22px;
+    font-size: 16px;
+  }
+
+  .home-footer {
+    bottom: max(6px, env(safe-area-inset-bottom, 0px));
+    font-size: 11px;
+  }
+}
+
+/* Short laptop heights: avoid overlap with the final CTA button */
+@media (min-width: 721px) and (max-height: 760px) {
+  .home-footer {
+    display: none;
+  }
+}
