@@ -143,5 +143,4 @@ deployment from ACR webhook) to pick it up.
 - Persistent storage — rooms live only in process memory. Fine for one App
   Service instance; if you scale out, move room state to Redis (Azure Cache
   for Redis) so all instances share the directory.
-- Reconnect-after-disconnect during a multiplayer game.
 - Auth / accounts — joining a room only requires the 6-char code today.
