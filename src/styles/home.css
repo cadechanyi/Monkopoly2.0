@@ -4,6 +4,8 @@
   height: 100%;
   min-height: 100vh;
   min-height: 100dvh;
+  /* Smallest viewport height — closer to visible area when iOS Safari toolbars are shown. */
+  min-height: 100svh;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -150,10 +152,76 @@
   pointer-events: none;
 }
 
-/* Phones: reserve more space above the footer so buttons stay on-screen */
+/* Phones: top-align so CTAs stay in the visible frame (Safari bars ≠ DevTools). */
 @media (max-width: 720px) {
   .home-root {
-    padding-bottom: max(54px, calc(28px + env(safe-area-inset-bottom, 0px)));
+    height: auto;
+    max-height: 100vh;
+    max-height: 100svh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-top: max(8px, env(safe-area-inset-top, 0px));
+    padding-bottom: max(
+      72px,
+      calc(36px + env(safe-area-inset-bottom, 0px))
+    );
+  }
+
+  .home-content {
+    gap: 16px;
+    padding: 12px 16px 4px;
+    width: 100%;
+  }
+
+  .home-title-image {
+    max-height: min(200px, 28vh);
+    max-height: min(200px, 28svh);
+    width: min(560px, 88vw);
+    height: auto;
+  }
+
+  .home-subtitle {
+    font-size: clamp(14px, 3.6vw, 18px);
+  }
+
+  .home-buttons {
+    margin-top: 4px;
+    gap: 12px;
+  }
+
+  .home-btn {
+    padding: 14px 22px;
+    font-size: 16px;
+  }
+
+  .home-footer {
+    bottom: max(6px, env(safe-area-inset-bottom, 0px));
+    font-size: 11px;
+  }
+}
+
+/* Very short phones: trim hero height so all three buttons fit above Safari UI */
+@media (max-width: 720px) and (max-height: 700px) {
+  .home-content {
+    gap: 12px;
+    padding-top: 8px;
+  }
+
+  .home-title-image {
+    max-height: min(160px, 24vh);
+    max-height: min(160px, 24svh);
+  }
+
+  .home-buttons {
+    gap: 10px;
+  }
+
+  .home-btn {
+    padding: 12px 20px;
+    font-size: 15px;
   }
 }
 
